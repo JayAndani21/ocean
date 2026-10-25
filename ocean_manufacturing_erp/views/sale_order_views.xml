@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Ocean Technoforge
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html). -->
+<odoo>
+
+    <!-- Inherit Sale Order Form View to add CUSTOMER PO Tab -->
+    <record id="view_order_form_inherit_customer_po" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.customer.po</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='order_lines']" position="after">
+                <page string="Customer PO" name="customer_po">
+                    <group>
+                        <group>
+                            <field name="po_number"/>
+                        </group>
+                    </group>
+                    <separator string="Documents"/>
+                    <field name="po_attachment_ids" widget="many2many_binary" string="Documents" nolabel="1"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

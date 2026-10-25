@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Ocean Technoforge
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html). -->
+<odoo>
+
+    <record id="view_ocean_production_output_wizard_form" model="ir.ui.view">
+        <field name="name">ocean.production.output.wizard.form</field>
+        <field name="model">ocean.production.output.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Record Production Output">
+                <sheet>
+                    <field name="workorder_id" invisible="1"/>
+                    <field name="operation_type" invisible="1"/>
+                    <field name="wizard_mode" invisible="1"/>
+                    <field name="mode" invisible="1"/>
+                    <field name="reject_location_id" invisible="1"/>
+                    <field name="is_first_operation" invisible="1"/>
+
+                    <div class="alert alert-info text-center fw-bold" role="status" invisible="wizard_mode != 'push'">
+                        Recording Partial Output - Work Order will remain In Progress
+                    </div>
+                    <div class="alert alert-warning text-center fw-bold" role="status" invisible="wizard_mode != 'finish'">
+                        Finalizing Operation - Work Order will be marked Done
+                    </div>
+
+                    <group>
+                        <group string="Operation Context">
+                            <field name="production_id" readonly="1"/>
+                            <field name="product_id" readonly="1"/>
+                            <field name="operation_type" readonly="1"/>
+                            <field name="workcenter_id" readonly="1"/>
+                        </group>
+                        <group string="Progress Tracking">
+                            <label for="planned_qty" string="Planned Target"/>
+                            <div class="o_row">
+                                <field name="planned_qty" readonly="1"/>
+                                <field name="product_uom_id" readonly="1"/>
+                            </div>
+                            <label for="already_produced_qty" string="Already Produced"/>
+                            <div class="o_row">
+                                <field name="already_produced_qty" readonly="1"/>
+                                <field name="product_uom_id" readonly="1"/>
+                            </div>
+                            <label for="remaining_qty" string="Remaining Balance"/>
+                            <div class="o_row">
+                                <field name="remaining_qty" readonly="1"/>
+                                <field name="product_uom_id" readonly="1"/>
+                            </div>
+                        </group>
+                    </group>
+
+                    <group string="Input Material Used">
+                        <group>
+                            <field name="input_qty_used" string="Input Raw Material (KG)" invisible="not is_first_operation"/>
+                            <field name="input_qty_used" string="Input Pieces (PCS)" invisible="is_first_operation"/>
+                        </group>
+                        <group>
+                            <field name="next_operation" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Production Output">
+                        <group>
+                            <label for="good_qty" string="Good Output Quantity"/>
+                            <div class="o_row">
+                                <field name="good_qty" class="oe_inline"/>
+                                <field name="product_uom_id" readonly="1" class="oe_inline"/>
+                            </div>
+                            <field name="destination_location_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <label for="reject_qty" string="Reject / Scrap Quantity"/>
+                            <div class="o_row">
+                                <field name="reject_qty" class="oe_inline"/>
+                                <field name="product_uom_id" readonly="1" class="oe_inline"/>
+                            </div>
+                        </group>
+                    </group>
+
+                    <group string="Previous Operation Notes" invisible="not previous_remarks">
+                        <field name="previous_remarks" readonly="1" nolabel="1"/>
+                    </group>
+
+                    <group string="Notes">
+                        <field name="remarks" nolabel="1" placeholder="Add notes, heat number, or operational details..."/>
+                    </group>
+
+                    <group string="📱 WhatsApp Notification" name="group_whatsapp">
+                        <group>
+                            <field name="send_whatsapp" string="Enable WhatsApp"/>
+                            <field name="whatsapp_partner_id" invisible="not send_whatsapp" options="{'no_create': True}"/>
+                            <field name="whatsapp_phone" invisible="not send_whatsapp" placeholder="e.g. 919876543210 (Leave blank to pick chat in WhatsApp)"/>
+                        </group>
+                        <group invisible="not send_whatsapp">
+                            <div class="alert alert-light text-muted small p-2 m-0 border" role="status">
+                                <i class="fa fa-info-circle text-primary me-1"/>
+                                Clicking <b>"Confirm &amp; Send WhatsApp"</b> will record production and open WhatsApp Web/App with this message pre-filled. You can edit the text below before sending.
+                            </div>
+                        </group>
+                        <field name="whatsapp_message" invisible="not send_whatsapp" nolabel="1" colspan="2" placeholder="WhatsApp message preview..."/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm_and_whatsapp" string="Confirm &amp; Send WhatsApp" type="object" class="btn-success fw-bold" icon="fa-whatsapp" invisible="not send_whatsapp"/>
+                    <button name="action_confirm_output" string="Confirm &amp; Push to Next Operation" type="object" class="btn-primary" invisible="wizard_mode != 'push'"/>
+                    <button name="action_confirm_output" string="Confirm &amp; Finish Operation" type="object" class="btn-primary" invisible="wizard_mode != 'finish'"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

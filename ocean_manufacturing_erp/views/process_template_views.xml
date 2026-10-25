@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Ocean Technoforge
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html). -->
+<odoo>
+
+    <!-- Process Template Form View -->
+    <record id="view_ocean_process_template_form" model="ir.ui.view">
+        <field name="name">ocean.process.template.form</field>
+        <field name="model">ocean.process.template</field>
+        <field name="arch" type="xml">
+            <form string="Process Template">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="e.g. Standard Forging Process"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Operations" name="operations">
+                            <field name="line_ids" nolabel="1">
+                                <list string="Template Operations" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="operation_type"/>
+                                    <field name="workcenter_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="note" placeholder="Add description or notes about this process template..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Process Template List View -->
+    <record id="view_ocean_process_template_list" model="ir.ui.view">
+        <field name="name">ocean.process.template.list</field>
+        <field name="model">ocean.process.template</field>
+        <field name="arch" type="xml">
+            <list string="Process Templates">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active" column_invisible="True"/>
+                <button name="unlink" type="object" icon="fa-trash" title="Delete" confirm="Are you sure you want to delete this process template?"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Process Template Search View -->
+    <record id="view_ocean_process_template_search" model="ir.ui.view">
+        <field name="name">ocean.process.template.search</field>
+        <field name="model">ocean.process.template</field>
+        <field name="arch" type="xml">
+            <search string="Search Process Template">
+                <field name="name" string="Template Name"/>
+                <field name="code" string="Code"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Process Template Action -->
+    <record id="action_ocean_process_template" model="ir.actions.act_window">
+        <field name="name">Process Templates</field>
+        <field name="res_model">ocean.process.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_ocean_process_template_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Process Template
+            </p><p>
+                Define reusable manufacturing process templates with predefined operations, work centers, and default durations (e.g. Cutting, Forging, CNC, VMC, Inspection, Packing).
+            </p>
+        </field>
+    </record>
+
+</odoo>

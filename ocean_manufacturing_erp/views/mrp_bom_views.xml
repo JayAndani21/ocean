@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Ocean Technoforge
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html). -->
+<odoo>
+
+    <!-- Inherit BoM Form View to add Process Template field and Reload Operations button -->
+    <record id="mrp_bom_form_view_inherit_process_template" model="ir.ui.view">
+        <field name="name">mrp.bom.form.inherit.process.template</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <label for="process_template_id"/>
+                <div class="o_row">
+                    <field name="process_template_id" placeholder="Select Process Template..." options="{'no_open': False, 'no_create': False}"/>
+                    <button name="action_reload_process_template"
+                            type="object"
+                            string="Reload Operations"
+                            icon="fa-refresh"
+                            class="btn-sm btn-link"
+                            invisible="not process_template_id"
+                            confirm="Reloading will replace current BoM operations with the template operations. Do you want to continue?"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit BoM Routing Workcenter Form View to display operation_type -->
+    <record id="mrp_routing_workcenter_form_view_inherit_ocean" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.form.inherit.ocean</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='workcenter_id']" position="after">
+                <field name="operation_type"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

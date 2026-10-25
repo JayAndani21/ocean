@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Ocean Technoforge
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html). -->
+<odoo>
+
+    <!-- Production Entry Wizard Form View -->
+    <record id="view_mrp_workorder_production_entry_form" model="ir.ui.view">
+        <field name="name">mrp.workorder.production.entry.form</field>
+        <field name="model">mrp.workorder.production.entry</field>
+        <field name="arch" type="xml">
+            <form string="Production Entry">
+                <sheet>
+                    <field name="workorder_id" invisible="1"/>
+                    <field name="session_id" invisible="1"/>
+                    <field name="operation_type" invisible="1"/>
+                    <field name="wizard_mode" invisible="1"/>
+                    
+                    <group>
+                        <group string="Operation Information">
+                            <field name="production_id" readonly="1"/>
+                            <field name="product_id" readonly="1"/>
+                            <field name="workcenter_id" readonly="1"/>
+                            <field name="planned_qty" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <!-- START MODE -->
+                    <group invisible="wizard_mode != 'start'">
+                        <group string="Start Details">
+                            <field name="input_qty" string="Input Raw Material (KG)" invisible="operation_type != 'cutting'"/>
+                            <field name="input_qty" string="Input Pieces (PCS)" readonly="1" invisible="operation_type == 'cutting'"/>
+                        </group>
+                    </group>
+
+                    <!-- SAVE PROGRESS & FINISH MODES -->
+                    <separator string="Production Quantities" invisible="wizard_mode == 'start'"/>
+
+                    <!-- Cutting View -->
+                    <group invisible="wizard_mode == 'start' or operation_type != 'cutting'">
+                        <group>
+                            <field name="input_qty" string="Input Raw Material (KG)" readonly="1"/>
+                            <field name="produced_qty" string="Cut Pieces Produced (PCS)"/>
+                            <field name="scrap_qty" string="Reject Cut Pieces (PCS)"/>
+                            <field name="good_qty" string="Good Cut Pieces (PCS)" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <!-- Forging / CNC / VMC View -->
+                    <group invisible="wizard_mode == 'start' or operation_type not in ('forging', 'cnc', 'vmc')">
+                        <group>
+                            <field name="input_qty" string="Input Pieces (PCS)" readonly="1"/>
+                            <field name="produced_qty" string="Output Pieces (PCS)"/>
+                            <field name="scrap_qty" string="Reject Pieces (PCS)"/>
+                            <field name="good_qty" string="Good Pieces (PCS)" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <!-- Inspection View -->
+                    <group invisible="wizard_mode == 'start' or operation_type != 'inspection'">
+                        <group>
+                            <field name="input_qty" string="Input Pieces (PCS)" readonly="1"/>
+                            <field name="produced_qty" string="Passed Pieces (PCS)"/>
+                            <field name="scrap_qty" string="Rejected Pieces (PCS)"/>
+                            <field name="good_qty" string="Good Pieces (PCS)" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <!-- Packing View -->
+                    <group invisible="wizard_mode == 'start' or operation_type != 'packing'">
+                        <group>
+                            <field name="input_qty" string="Input Pieces (PCS)" readonly="1"/>
+                            <field name="produced_qty" string="Packed Pieces (PCS)"/>
+                        </group>
+                    </group>
+
+                    <group invisible="wizard_mode == 'start'">
+                        <field name="previous_remarks" string="Previous Operations Remarks" readonly="1" invisible="not previous_remarks"/>
+                        <field name="remarks" placeholder="Add any operational remarks or notes..."/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm_start" string="Start Production" type="object" class="btn-primary" invisible="wizard_mode != 'start'"/>
+                    <button name="action_save_progress" string="Save Progress" type="object" class="btn-primary" invisible="wizard_mode != 'save_progress'"/>
+                    <button name="action_finish_operation" string="Finish Operation" type="object" class="btn-primary" invisible="wizard_mode != 'finish'"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

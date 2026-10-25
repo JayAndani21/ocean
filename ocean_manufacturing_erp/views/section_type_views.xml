@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Ocean Technoforge
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html). -->
+<odoo>
+
+    <!-- Section Type Form View -->
+    <record id="view_ocean_section_type_form" model="ir.ui.view">
+        <field name="name">ocean.section.type.form</field>
+        <field name="model">ocean.section.type</field>
+        <field name="arch" type="xml">
+            <form string="Section Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Section Type List View -->
+    <record id="view_ocean_section_type_list" model="ir.ui.view">
+        <field name="name">ocean.section.type.list</field>
+        <field name="model">ocean.section.type</field>
+        <field name="arch" type="xml">
+            <list string="Section Types" editable="bottom">
+                <field name="name"/>
+                <field name="active" column_invisible="True"/>
+                <button name="unlink" type="object" icon="fa-trash" title="Delete" confirm="Are you sure you want to delete this section type?"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Section Type Search View -->
+    <record id="view_ocean_section_type_search" model="ir.ui.view">
+        <field name="name">ocean.section.type.search</field>
+        <field name="model">ocean.section.type</field>
+        <field name="arch" type="xml">
+            <search string="Search Section Type">
+                <field name="name" string="Section Type"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Section Type Action -->
+    <record id="action_ocean_section_type" model="ir.actions.act_window">
+        <field name="name">Section Types</field>
+        <field name="res_model">ocean.section.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_ocean_section_type_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Section Type
+            </p><p>
+                Configure different section types (e.g. Round, Square, Flat, Hex, etc.) used in the forging processes.
+            </p>
+        </field>
+    </record>
+
+</odoo>

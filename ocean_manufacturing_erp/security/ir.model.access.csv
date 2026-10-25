@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ocean_material_grade,ocean.material.grade,model_ocean_material_grade,base.group_user,1,1,1,1
+access_ocean_section_type,ocean.section.type,model_ocean_section_type,base.group_user,1,1,1,1
+access_ocean_process_template,ocean.process.template,model_ocean_process_template,base.group_user,1,1,1,1
+access_ocean_process_template_line,ocean.process.template.line,model_ocean_process_template_line,base.group_user,1,1,1,1
+access_mrp_workorder_production_entry,mrp.workorder.production.entry,model_mrp_workorder_production_entry,base.group_user,1,1,1,1
+access_mrp_workorder_session,mrp.workorder.session,model_mrp_workorder_session,base.group_user,1,1,1,1
+access_ocean_production_start_wizard,ocean.production.start.wizard,model_ocean_production_start_wizard,base.group_user,1,1,1,1
+access_ocean_production_output_wizard,ocean.production.output.wizard,model_ocean_production_output_wizard,base.group_user,1,1,1,1

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Ocean Technoforge
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html). -->
+<odoo>
+
+    <!-- Top-level Root Menu -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_root"
+        name="Ocean ERP"
+        sequence="10"/>
+
+    <!-- CRM Category Menu -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_crm"
+        name="CRM"
+        parent="ocean_manufacturing_erp_menu_root"
+        sequence="10"/>
+
+    <!-- CRM Submenu items -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_crm_leads"
+        name="Leads"
+        parent="ocean_manufacturing_erp_menu_crm"
+        action="crm.crm_lead_all_leads"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_crm_opportunities"
+        name="Pipeline"
+        parent="ocean_manufacturing_erp_menu_crm"
+        action="crm.action_your_pipeline"
+        sequence="20"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_crm_customers"
+        name="Customers"
+        parent="ocean_manufacturing_erp_menu_crm"
+        action="base.action_partner_form"
+        sequence="30"/>
+
+    <!-- Sales Category Menu -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_sale"
+        name="Sales"
+        parent="ocean_manufacturing_erp_menu_root"
+        sequence="20"/>
+
+    <!-- Sales Submenu items -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_sale_quotations"
+        name="Quotations"
+        parent="ocean_manufacturing_erp_menu_sale"
+        action="sale.action_quotations"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_sale_orders"
+        name="Orders"
+        parent="ocean_manufacturing_erp_menu_sale"
+        action="sale.action_orders"
+        sequence="20"/>
+
+    <!-- Purchase Category Menu -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_purchase"
+        name="Purchase"
+        parent="ocean_manufacturing_erp_menu_root"
+        sequence="30"/>
+
+    <!-- Purchase Submenu items -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_purchase_rfq"
+        name="Requests for Quotation"
+        parent="ocean_manufacturing_erp_menu_purchase"
+        action="purchase.purchase_rfq"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_purchase_orders"
+        name="Purchase Orders"
+        parent="ocean_manufacturing_erp_menu_purchase"
+        action="purchase.purchase_form_action"
+        sequence="20"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_purchase_vendors"
+        name="Vendors"
+        parent="ocean_manufacturing_erp_menu_purchase"
+        action="account.res_partner_action_supplier"
+        sequence="30"/>
+
+    <!-- Invoicing Category Menu -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_invoice"
+        name="Invoicing"
+        parent="ocean_manufacturing_erp_menu_root"
+        sequence="60"/>
+
+    <!-- Customer submenus -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_invoice_customer"
+        name="Customer"
+        parent="ocean_manufacturing_erp_menu_invoice"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_invoice_customer_invoices"
+        name="Invoices"
+        parent="ocean_manufacturing_erp_menu_invoice_customer"
+        action="account.action_move_out_invoice"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_invoice_customer_refunds"
+        name="Credit Notes"
+        parent="ocean_manufacturing_erp_menu_invoice_customer"
+        action="account.action_move_out_refund_type_non_legacy"
+        sequence="20"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_invoice_customer_payments"
+        name="Payments"
+        parent="ocean_manufacturing_erp_menu_invoice_customer"
+        action="account.action_account_payments"
+        sequence="30"/>
+
+    <!-- Vendor submenus -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_invoice_vendor"
+        name="Vendor"
+        parent="ocean_manufacturing_erp_menu_invoice"
+        sequence="20"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_invoice_vendor_bills"
+        name="Vendor Bills"
+        parent="ocean_manufacturing_erp_menu_invoice_vendor"
+        action="account.action_move_in_invoice"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_invoice_vendor_refunds"
+        name="Debit Notes"
+        parent="ocean_manufacturing_erp_menu_invoice_vendor"
+        action="account.action_move_in_refund_type"
+        sequence="20"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_invoice_vendor_payments"
+        name="Payments"
+        parent="ocean_manufacturing_erp_menu_invoice_vendor"
+        action="account.action_account_payments_payable"
+        sequence="30"/>
+
+    <!-- Inventory Category Menu -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_stock"
+        name="Inventory"
+        parent="ocean_manufacturing_erp_menu_root"
+        sequence="70"/>
+
+    <!-- Inventory Submenu items -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_stock_receipts"
+        name="Receipts"
+        parent="ocean_manufacturing_erp_menu_stock"
+        action="stock.action_picking_tree_incoming"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_stock_deliveries"
+        name="Deliveries"
+        parent="ocean_manufacturing_erp_menu_stock"
+        action="stock.action_picking_tree_outgoing"
+        sequence="20"/>
+
+    <!-- Manufacturing Category Menu -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_mrp"
+        name="Manufacturing"
+        parent="ocean_manufacturing_erp_menu_root"
+        sequence="45"/>
+
+    <!-- Manufacturing Submenu items -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_mrp_production"
+        name="Manufacturing Orders"
+        parent="ocean_manufacturing_erp_menu_mrp"
+        action="action_ocean_mrp_production"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_mrp_workorder"
+        name="Work Orders"
+        parent="ocean_manufacturing_erp_menu_mrp"
+        action="action_ocean_mrp_workorder"
+        sequence="20"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_mrp_wc"
+        name="Work Centers"
+        parent="ocean_manufacturing_erp_menu_mrp"
+        action="action_ocean_mrp_workcenter"
+        sequence="30"/>
+
+    <!-- Products Category Menu -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_products_cat"
+        name="Products"
+        parent="ocean_manufacturing_erp_menu_root"
+        sequence="50"/>
+
+    <!-- Products Submenu items -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_products"
+        name="Products"
+        parent="ocean_manufacturing_erp_menu_products_cat"
+        action="product.product_template_action"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_mrp_bom"
+        name="Bills of Materials"
+        parent="ocean_manufacturing_erp_menu_products_cat"
+        action="mrp.mrp_bom_form_action"
+        sequence="30"/>
+
+    <!-- Configuration Category Menu -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_config"
+        name="Configuration"
+        parent="ocean_manufacturing_erp_menu_root"
+        sequence="100"/>
+
+    <!-- Settings -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_settings"
+        name="Settings"
+        parent="ocean_manufacturing_erp_menu_config"
+        action="base.res_config_setting_act_window"
+        sequence="5"/>
+
+    <!-- Products Section -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_config_products"
+        name="Products"
+        parent="ocean_manufacturing_erp_menu_config"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_product_category"
+        name="Product Categories"
+        parent="ocean_manufacturing_erp_menu_config_products"
+        action="product.product_category_action_form"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_uom"
+        name="Units &amp; Packagings"
+        parent="ocean_manufacturing_erp_menu_config_products"
+        action="uom.product_uom_form_action"
+        groups="uom.group_uom"
+        sequence="20"/>
+
+    <!-- Ocean Section -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_config_master"
+        name="Ocean"
+        parent="ocean_manufacturing_erp_menu_config"
+        sequence="20"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_material_grade"
+        name="Material Grades"
+        parent="ocean_manufacturing_erp_menu_config_master"
+        action="action_ocean_material_grade"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_section_type"
+        name="Section Types"
+        parent="ocean_manufacturing_erp_menu_config_master"
+        action="action_ocean_section_type"
+        sequence="20"/>
+
+    <!-- Manufacturing Section -->
+    <menuitem
+        id="ocean_manufacturing_erp_menu_config_mrp"
+        name="Manufacturing"
+        parent="ocean_manufacturing_erp_menu_config"
+        sequence="30"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_mrp_workcenter"
+        name="Work Centers"
+        parent="ocean_manufacturing_erp_menu_config_mrp"
+        action="action_ocean_mrp_workcenter"
+        sequence="10"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_mrp_operations"
+        name="Operations"
+        parent="ocean_manufacturing_erp_menu_config_mrp"
+        action="action_ocean_mrp_routing"
+        sequence="20"/>
+
+    <menuitem
+        id="ocean_manufacturing_erp_menu_mrp_process_template"
+        name="Process Templates"
+        parent="ocean_manufacturing_erp_menu_config_mrp"
+        action="action_ocean_process_template"
+        sequence="30"/>
+
+</odoo>

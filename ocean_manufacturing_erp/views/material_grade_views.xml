@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Ocean Technoforge
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html). -->
+<odoo>
+
+    <!-- Material Grade Form View -->
+    <record id="view_ocean_material_grade_form" model="ir.ui.view">
+        <field name="name">ocean.material.grade.form</field>
+        <field name="model">ocean.material.grade</field>
+        <field name="arch" type="xml">
+            <form string="Material Grade">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Material Grade List View -->
+    <record id="view_ocean_material_grade_list" model="ir.ui.view">
+        <field name="name">ocean.material.grade.list</field>
+        <field name="model">ocean.material.grade</field>
+        <field name="arch" type="xml">
+            <list string="Material Grades" editable="bottom">
+                <field name="name"/>
+                <field name="active" column_invisible="True"/>
+                <button name="unlink" type="object" icon="fa-trash" title="Delete" confirm="Are you sure you want to delete this material grade?"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Material Grade Search View -->
+    <record id="view_ocean_material_grade_search" model="ir.ui.view">
+        <field name="name">ocean.material.grade.search</field>
+        <field name="model">ocean.material.grade</field>
+        <field name="arch" type="xml">
+            <search string="Search Material Grade">
+                <field name="name" string="Grade"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Material Grade Action -->
+    <record id="action_ocean_material_grade" model="ir.actions.act_window">
+        <field name="name">Material Grades</field>
+        <field name="res_model">ocean.material.grade</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_ocean_material_grade_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Material Grade
+            </p><p>
+                Configure different material grades (e.g. MS, EN8, EN9, SS304, etc.) used in the forging processes.
+            </p>
+        </field>
+    </record>
+
+</odoo>

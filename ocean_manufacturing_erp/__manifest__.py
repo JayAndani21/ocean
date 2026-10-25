@@ -1,0 +1,41 @@
+{
+    "name": "Ocean Manufacturing ERP",
+    "version": "19.0.1.0.0",
+    "summary": "Manufacturing ERP for forging",
+    "description": """
+        Manufacturing ERP for managing the complete business and production
+        process including customer requirements, quotations, purchasing,
+        inventory, cutting, forging, CNC/VMC, quality, scrap and delivery.
+    """,
+    "category": "Manufacturing",
+    "author": "Ocean Technoforge",
+    "license": "LGPL-3",
+    "depends": [
+        "base",
+        "mail",
+        "crm",
+        "sale_management",
+        "purchase",
+        "stock",
+        "mrp",
+        "account",
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "data/ir_sequence_data.xml",
+        "views/material_grade_views.xml",
+        "views/section_type_views.xml",
+        "views/process_template_views.xml",
+        "views/mrp_bom_views.xml",
+        "views/production_start_wizard_views.xml",
+        "views/production_output_wizard_views.xml",
+        "views/mrp_workorder_views.xml",
+        "views/production_entry_wizard_views.xml",
+        "views/crm_lead_views.xml",
+        "views/sale_order_views.xml",
+        "views/menus.xml",
+    ],
+    "installable": True,
+    "application": True,
+    "auto_install": False,
+}

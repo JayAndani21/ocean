@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Ocean Technoforge
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html). -->
+<odoo>
+
+    <record id="view_ocean_production_start_wizard_form" model="ir.ui.view">
+        <field name="name">ocean.production.start.wizard.form</field>
+        <field name="model">ocean.production.start.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Start Production">
+                <sheet>
+                    <field name="workorder_id" invisible="1"/>
+                    <field name="operation_type" invisible="1"/>
+                    <field name="prev_workorder_id" invisible="1"/>
+                    <field name="is_first_operation" invisible="1"/>
+
+                    <div class="alert alert-info py-2 mb-2 fw-semibold" role="status" invisible="not previous_operation_info">
+                        <field name="previous_operation_info" readonly="1" nolabel="1"/>
+                    </div>
+
+                    <div class="alert alert-warning py-2 mb-2" role="status" invisible="not previous_remarks">
+                        <div class="fw-bold mb-1"><i class="fa fa-sticky-note me-1"/>Previous Operation Notes:</div>
+                        <field name="previous_remarks" readonly="1" nolabel="1"/>
+                    </div>
+
+                    <group>
+                        <group string="Manufacturing Details">
+                            <field name="production_id" readonly="1"/>
+                            <field name="product_id" readonly="1"/>
+                            <field name="operation_id" readonly="1"/>
+                            <field name="workcenter_id" readonly="1"/>
+                            <field name="planned_qty" readonly="1"/>
+                        </group>
+                        <group string="Input Material &amp; Location">
+                            <field name="input_product_id" readonly="1"/>
+                            <field name="source_location_id" readonly="1"/>
+                            <label for="available_qty" string="Available Stock"/>
+                            <div class="o_row">
+                                <field name="available_qty" readonly="1"/>
+                                <field name="input_uom_id" readonly="1"/>
+                            </div>
+                        </group>
+                    </group>
+
+                    <group string="Start Parameters">
+                        <group>
+                            <label for="input_qty" string="Input Raw Material" invisible="not is_first_operation"/>
+                            <label for="input_qty" string="Input Pieces" invisible="is_first_operation"/>
+                            <div class="o_row">
+                                <field name="input_qty" class="oe_inline"/>
+                                <field name="input_uom_id" readonly="1" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="operator_id" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_start_production" string="Start Production" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
